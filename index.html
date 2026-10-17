@@ -1,0 +1,108 @@
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Records</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background-color: lightgray;
+            text-align: center;
+        }
+
+        input {
+            padding: 10px;
+            width: 250px;
+            margin-bottom: 20px;
+        }
+
+        #students {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .card {
+            background-color: white;
+            width: 200px;
+            padding: 15px;
+            border: 1px solid gray;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Student Records</h1>
+
+    <input type="text" id="search" placeholder="Search by name">
+
+    <div id="students"></div>
+
+    <script>
+        // Student array
+        let students = [
+            {
+                name: "Rahul",
+                marks: 85,
+                class: "12th",
+                address: "Delhi"
+            },
+            {
+                name: "Priya",
+                marks: 90,
+                class: "12th",
+                address: "Noida"
+            },
+            {
+                name: "Aman",
+                marks: 78,
+                class: "11th",
+                address: "Gurgaon"
+            },
+            {
+                name: "Neha",
+                marks: 88,
+                class: "11th",
+                address: "Delhi"
+            }
+        ];
+
+        let studentDiv = document.getElementById("students");
+        let search = document.getElementById("search");
+
+        // Display student cards using map()
+        function displayStudents(data) {
+            studentDiv.innerHTML = data.map(function(student) {
+                return `
+                    <div class="card">
+                        <h2>${student.name}</h2>
+                        <p>Marks: ${student.marks}</p>
+                        <p>Class: ${student.class}</p>
+                        <p>Address: ${student.address}</p>
+                    </div>
+                `;
+            }).join("");
+        }
+
+        // Display all students
+        displayStudents(students);
+
+        // Search students using filter()
+        search.addEventListener("input", function() {
+            let text = search.value.toLowerCase();
+
+            let result = students.filter(function(student) {
+                return student.name.toLowerCase().includes(text);
+            });
+
+            displayStudents(result);
+        });
+    </script>
+
+</body>
+</html>
+```
